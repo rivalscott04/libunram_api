@@ -7,6 +7,7 @@ use App\Models\Loan;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class LoanController extends Controller
@@ -62,9 +63,24 @@ class LoanController extends Controller
             ],500);
         }
 
+        $limit = DB::table("mst_member_type")
+        ->select('loan_limit')
+        ->first();
+        // return $limit->loan_limit;
+
+         $history = Loan::where('member_id',$request->member_id)->where('is_lent','=','1')->get();
+        //  return count($history);
+
+        if($limit->loan_limit == count($history)){
+            return response()->json([
+                'status' => 'Error',
+                'message' => 'Kuota Peminjaman Sudah Penuh',
+                'data' => null
+            ], 404);
+        }
+
         $loan = Loan::where('is_lent','=','1')->where('item_code',$request->item_code)->first();
         if($loan){
-
             return response()->json([
                 'status' => 'Error',
                 'message' => 'Buku Sudah DiPinjam',
