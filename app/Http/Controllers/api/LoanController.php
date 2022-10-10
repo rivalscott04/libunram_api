@@ -62,6 +62,15 @@ class LoanController extends Controller
                 'message' => $validator->messages()->all()
             ],500);
         }
+        
+        $loan = Loan::where('is_lent','=','1')->where('item_code',$request->item_code)->first();
+        if($loan){
+            return response()->json([
+                'status' => 'Error',
+                'message' => 'Buku Sudah DiPinjam',
+                'data' => $loan
+            ], 404);
+        }
 
         $limit = DB::table("mst_member_type")
         ->select('loan_limit')
@@ -79,14 +88,6 @@ class LoanController extends Controller
             ], 404);
         }
 
-        $loan = Loan::where('is_lent','=','1')->where('item_code',$request->item_code)->first();
-        if($loan){
-            return response()->json([
-                'status' => 'Error',
-                'message' => 'Buku Sudah DiPinjam',
-                'data' => $loan
-            ], 404);
-        }
     
         $data = new Loan;
         $today = Carbon::now()->format('Y-m-d');
