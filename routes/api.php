@@ -47,5 +47,5 @@ Route::group(['namespace' => 'api'], function () {
     Route::get('item/{id}','ItemController@get')->name('item.get');
     Route::post('item','ItemController@getByItem')->name('item.getByItem');
     
-    Route::get('member','MemberController@index')->name('member.index');
+    Route::get('member/get/{id}','MemberController@get')->name('member.index');
 });

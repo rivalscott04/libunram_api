@@ -9,7 +9,7 @@ class Member extends Model
 {
     use HasFactory;
 
-    public $primaryKey  = 'member_id';
+    // public $primaryKey  = 'member_id';
     protected $table = 'member';
     // protected $with = 'guest';
 
