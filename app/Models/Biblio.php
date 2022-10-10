@@ -12,9 +12,13 @@ class Biblio extends Model
     public $timestamps = false;
     public $primaryKey  = 'biblio_id';
     protected $table = 'biblio';
-    protected $with = 'publisher';
+    protected $with = ['publisher','author'];
 
     public function publisher(){
         return $this->hasOne(Publisher::class, 'publisher_id', 'publisher_id');
+    }
+
+    public function author(){
+        return $this->hasMany(Author::class, 'biblio_id', 'biblio_id');
     }
 }

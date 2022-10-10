@@ -17,4 +17,6 @@ class Item extends Model
     public function biblio(){
         return $this->belongsTo(Biblio::class, 'biblio_id','biblio_id')->select(['biblio_id','title','publisher_id','publish_year']);
     }
+
+    
 }

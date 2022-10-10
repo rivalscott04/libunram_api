@@ -48,6 +48,7 @@ class ItemController extends Controller
         }
 
         $data = Item::where('item_code',$request->item_code)->with('biblio')->first();
+        // return $data->biblio->author[1];
         if($data){
             return response()->json([
                 'status' => 'success',
@@ -55,7 +56,9 @@ class ItemController extends Controller
                 'item_code' => $data->item_code,
                 'title' => $data->biblio->title,
                 'publihser_name' => $data->biblio->publisher->publisher_name,
-                'publish_year' => $data->biblio->publish_year
+                'publish_year' => $data->biblio->publish_year,
+                'author1' => $data->biblio->author[0]->author_detail->author_name,
+                'author2' => $data->biblio->author[1]->author_detail->author_name
             ], 200);
         }else{
             return response()->json([

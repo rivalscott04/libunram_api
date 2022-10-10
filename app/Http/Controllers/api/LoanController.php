@@ -49,7 +49,6 @@ class LoanController extends Controller
         }
      }
 
-
      public function store(Request $request){
         $validator = Validator::make($request->all(),[
             "item_code" => "required",
@@ -65,6 +64,7 @@ class LoanController extends Controller
 
         $loan = Loan::where('is_lent','=','1')->where('item_code',$request->item_code)->first();
         if($loan){
+
             return response()->json([
                 'status' => 'Error',
                 'message' => 'Buku Sudah DiPinjam',

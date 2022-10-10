@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Publisher extends Model
+class AuthorDetail extends Model
 {
     use HasFactory;
 
-    public $primaryKey  = 'publisher_id';
     public $timestamps = false;
-    protected $table = 'mst_publisher';
+    public $primaryKey  = 'author_id';
+    protected $table = 'mst_author';
 }
