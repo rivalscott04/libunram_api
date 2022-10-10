@@ -25,7 +25,6 @@ Route::group(['namespace' => 'api'], function () {
     Route::get('guestByDate/{id}','GuestController@getByDate')->name('guest.getByDate');
     Route::post('guest','GuestController@store')->name('guest.store');
 
-
     Route::get('visitor','VisitorController@index')->name('visitor.index');
     Route::get('visitor/{id}','VisitorController@get')->name('visitor.get');
     Route::get('visitor/getByMemberId/{id}','VisitorController@getByMemberId')->name('visitor.getByMemberId');

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Guest;
 use App\Models\Loan;
 use Carbon\Carbon;
 use DateTime;
@@ -63,6 +62,15 @@ class LoanController extends Controller
                 'message' => $validator->messages()->all()
             ],500);
         }
+
+        $loan = Loan::where('is_lent','=','1')->where('item_code',$request->item_code)->first();
+        if($loan){
+            return response()->json([
+                'status' => 'Error',
+                'message' => 'Buku Sudah DiPinjam',
+                'data' => $loan
+            ], 404);
+        }
     
         $data = new Loan;
         $today = Carbon::now()->format('Y-m-d');
@@ -80,7 +88,7 @@ class LoanController extends Controller
         
         return response()->json([
             'status' => 'success',
-            'message' => 'New Guest Created',
+            'message' => 'New Loan Created',
             'data' => $data
         ], 201);
     }
@@ -116,13 +124,13 @@ class LoanController extends Controller
             $data->update();
             return response()->json([
                 'status' => 'success',
-                'message' => 'Guest Updated',
+                'message' => 'Loan Updated',
                 'data' => $data
             ], 201);
         }else{
             return response()->json([
                 'status' => 'error',
-                'message' => 'Guest Not Found',
+                'message' => 'Loan Not Found',
                 'data' => null
             ], 404);
         }

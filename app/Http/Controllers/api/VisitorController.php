@@ -67,7 +67,26 @@ class VisitorController extends Controller
                 'message' => $validator->messages()->all()
             ],500);
         }
-    
+
+        // $visitor = Visitor::
+        // $visitor = Visitor::where(['member_id'=>$request->member_id])->first();
+
+        $date = Carbon::now()->format('Y-m-d');
+        // return $date;
+        $visitor = DB::table("visitor_count")
+        ->where(DB::raw("(DATE_FORMAT(checkin_date,'%Y-%m-%d'))"),$date)
+        ->where('member_id',$request->member_id)
+        ->first();
+
+        // return $visitor;
+        if ($visitor){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Anda Sudah Mengisi Buku Tamu',
+                'data' => $visitor
+            ], 404);
+        }
+        
         $data = new Visitor;
         $data->member_id = $request->member_id;
         $data->member_name = $request->member_name;
