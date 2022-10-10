@@ -31,6 +31,7 @@ Route::group(['namespace' => 'api'], function () {
     Route::post('visitor','VisitorController@store')->name('visitor.store');
 
     Route::get('loan','LoanController@index')->name('loan.index');
+    Route::post('loan/getLoanHistory','LoanController@getHistory')->name('loan.getHistory');
     Route::post('loan/getLoan','LoanController@getByIdMember')->name('loan.getByIdMember');
     Route::post('loan','LoanController@store')->name('loan.store');
     Route::put('loan/{id}','LoanController@update')->name('loan.update');

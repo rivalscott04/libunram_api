@@ -50,6 +50,35 @@ class LoanController extends Controller
         }
      }
 
+     public function getHistory(Request $request){
+        $validator = Validator::make($request->all(),[
+            "member_id" => "required",
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'status' => 'Error',
+                'message' => $validator->messages()->all()
+            ],500);
+        }
+       
+        $data = Loan::where('member_id',$request->member_id)->where('is_return','=','1')->with('item')->get();
+        // return $loan;
+        if($data){
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Detail Hitory Found',
+                'data' => $data
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Detail Hitory Not Found',
+                'data' => null
+            ], 404);
+        }
+     }
+
      public function store(Request $request){
         $validator = Validator::make($request->all(),[
             "item_code" => "required",
@@ -62,7 +91,7 @@ class LoanController extends Controller
                 'message' => $validator->messages()->all()
             ],500);
         }
-        
+
         $loan = Loan::where('is_lent','=','1')->where('item_code',$request->item_code)->first();
         if($loan){
             return response()->json([
