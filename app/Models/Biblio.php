@@ -9,7 +9,7 @@ class Biblio extends Model
 {
     use HasFactory;
 
-
+    public $timestamps = false;
     public $primaryKey  = 'biblio_id';
     protected $table = 'biblio';
     protected $with = 'publisher';

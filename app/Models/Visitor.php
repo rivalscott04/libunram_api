@@ -10,5 +10,7 @@ class Visitor extends Model
     use HasFactory;
 
     public $primaryKey  = 'visitor_id';
+    public $timestamps = false;
     protected $table = 'visitor_count';
+    
 }

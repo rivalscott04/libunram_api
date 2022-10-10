@@ -9,6 +9,7 @@ class Item extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
     public $primaryKey  = 'item_id';
     protected $table = 'item';
     protected $with = 'biblio';

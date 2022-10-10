@@ -10,5 +10,7 @@ class Guest extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
     protected $table = 'visitor_count';
+
 }
