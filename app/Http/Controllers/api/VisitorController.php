@@ -59,6 +59,7 @@ class VisitorController extends Controller
             "member_id" => "required",
             "member_name" => "required",
             "institution" => "required",
+            "id_ruangan" => "required",
         ]);
 
         if($validator->fails()){
@@ -68,17 +69,14 @@ class VisitorController extends Controller
             ],500);
         }
 
-        // $visitor = Visitor::
-        // $visitor = Visitor::where(['member_id'=>$request->member_id])->first();
 
         $date = Carbon::now()->format('Y-m-d');
-        // return $date;
         $visitor = DB::table("visitor_count")
         ->where(DB::raw("(DATE_FORMAT(checkin_date,'%Y-%m-%d'))"),$date)
         ->where('member_id',$request->member_id)
         ->first();
 
-        // return $visitor;
+        return $visitor;
         if ($visitor){
             return response()->json([
                 'status' => 'error',
