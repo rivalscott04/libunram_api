@@ -48,8 +48,21 @@ class ItemController extends Controller
         }
 
         $data = Item::where('item_code',$request->item_code)->with('biblio')->first();
-        // return $data->biblio->author[1];
+        // return $data;
         if($data){
+            // return "ada";
+            if(count($data->biblio->author) < 2){
+                // return "Data Lebih dari satu";
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Detail Item Found',
+                    'item_code' => $data->item_code,
+                    'title' => $data->biblio->title,
+                    'publihser_name' => $data->biblio->publisher->publisher_name,
+                    'publish_year' => $data->biblio->publish_year,
+                    'author1' => $data->biblio->author[0]->author_detail->author_name,
+                ], 200);
+            }
             return response()->json([
                 'status' => 'success',
                 'message' => 'Detail Item Found',
