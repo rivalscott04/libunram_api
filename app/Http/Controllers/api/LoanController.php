@@ -103,7 +103,7 @@ class LoanController extends Controller
         // $tanggal = $date->modify($addDay)->format('Y-m-d');
         // return $tanggal;
         
-        $loan = Loan::where('is_lent','=','1')->where('item_code',$request->item_code)->first();
+        $loan = Loan::where('is_lent','=','1')->where('is_return','=','0')->where('item_code',$request->item_code)->first();
         if($loan){
             return response()->json([
                 'status' => 'Error',
@@ -117,7 +117,7 @@ class LoanController extends Controller
         ->first();
         // return $limit->loan_limit;
 
-         $history = Loan::where('member_id',$request->member_id)->where('is_lent','=','1')->get();
+         $history = Loan::where('member_id',$request->member_id)->where('is_return','=','0')->get();
         //  return count($history);
 
         if($limit->loan_limit == count($history)){
