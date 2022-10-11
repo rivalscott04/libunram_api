@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Room;
 use App\Models\Visitor;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -83,6 +84,14 @@ class VisitorController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Anda Sudah Mengisi Buku Tamu',
+                'data' => $visitor
+            ], 404);
+        }
+
+        if (Room::all()->where('id_ruangan', $request['id_ruangan'])->count()>0){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Ruangan Tidak',
                 'data' => $visitor
             ], 404);
         }
