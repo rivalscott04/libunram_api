@@ -88,7 +88,7 @@ class VisitorController extends Controller
             ], 404);
         }
 
-        if (Room::all()->where('id_ruangan', $request['id_ruangan'])->count()>0){
+        if (Room::all()->where('id_ruangan', $request['id_ruangan'])->count()==0){
             return response()->json([
                 'status' => 'error',
                 'message' => 'Ruangan Tidak',
