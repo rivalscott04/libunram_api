@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Loan;
 use Carbon\Carbon;
 use DateTime;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -92,6 +93,16 @@ class LoanController extends Controller
             ],500);
         }
 
+        $today = Carbon::now()->format('Y-m-d');
+        $date = new DateTime($today);
+        $client = new Client();
+        $response = $client->request('GET','http://101.50.3.56/config.json');
+        $content = $response->getBody()->getContents();
+        $data = json_decode($content);
+        $addDay = '+'.$data->due_date.' day';
+        // $tanggal = $date->modify($addDay)->format('Y-m-d');
+        // return $tanggal;
+        
         $loan = Loan::where('is_lent','=','1')->where('item_code',$request->item_code)->first();
         if($loan){
             return response()->json([
@@ -119,12 +130,10 @@ class LoanController extends Controller
 
     
         $data = new Loan;
-        $today = Carbon::now()->format('Y-m-d');
-        $date = new DateTime($today);
         $data->item_code = $request->item_code;
         $data->member_id = $request->member_id;
         $data->loan_date = $today;
-        $data->due_date = $date->modify('+7 day')->format('Y-m-d');
+        $data->due_date = $date->modify($addDay)->format('Y-m-d');
         $data->input_date = Carbon::now()->format('Y-m-d H:i:s');
         $data->last_update= Carbon::now()->format('Y-m-d H:i:s');
         $data->is_lent = 1;
