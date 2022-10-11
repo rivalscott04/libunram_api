@@ -91,7 +91,7 @@ class VisitorController extends Controller
         if (Room::all()->where('id_ruangan', $request['id_ruangan'])->count()==0){
             return response()->json([
                 'status' => 'error',
-                'message' => 'Ruangan Tidak',
+                'message' => 'Ruangan Tidak Ditemukan',
                 'data' => $visitor
             ], 404);
         }
