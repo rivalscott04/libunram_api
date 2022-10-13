@@ -474,7 +474,7 @@
                         <div class="ibox-content">
                             {{-- <div id="ct-chart6" class="ct-perfect-fourth"></div> --}}
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col-lg-8 col-sm-12">
                                     <div class="row mb-2 p-2">
                                         <div class="col-2 bg-primary">
                                             {{-- <span class="label label-primary"></span> --}}
@@ -509,7 +509,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-lg-4 col-sm-12 text-center">
                                     <h3>Total Pengunjung</h3>
                                     <h1 id="totalPengunjung"></h1>
                                 </div>
