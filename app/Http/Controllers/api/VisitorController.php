@@ -55,12 +55,12 @@ class VisitorController extends Controller
         }
     }
 
-    public function getByRoom(){
+    public function getByRoom($tgl){
         // return 'tes';
-        $date = Carbon::now()->format('Y-m-d');
+        // $date = Carbon::now()->format('Y-m-d');
         $data = DB::table("visitor_count")
         ->join('room', 'visitor_count.id_ruangan', '=', 'room.id_ruangan')
-        ->where(DB::raw("(DATE_FORMAT(checkin_date,'%Y-%m-%d'))"),$date)
+        ->where(DB::raw("(DATE_FORMAT(checkin_date,'%Y-%m-%d'))"),$tgl)
         ->get();
         if($data){
             return response()->json([

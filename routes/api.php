@@ -26,7 +26,7 @@ Route::group(['namespace' => 'api'], function () {
     Route::post('guest','GuestController@store')->name('guest.store');
 
     Route::get('visitor','VisitorController@index')->name('visitor.index');
-    Route::get('visitor/getByRoom','VisitorController@getByRoom')->name('visitor.getByRoom');
+    Route::get('visitor/getByRoom/{id}','VisitorController@getByRoom')->name('visitor.getByRoom');
     Route::get('visitor/{id}','VisitorController@get')->name('visitor.get');
     Route::get('visitor/getByMemberId/{id}','VisitorController@getByMemberId')->name('visitor.getByMemberId');
     Route::post('visitor','VisitorController@store')->name('visitor.store');

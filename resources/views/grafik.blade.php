@@ -554,10 +554,12 @@
     <script>
         $(document).ready(function(){
             
+            var date = new Date();
+            // document.getElementById('tgl').innerHTML = date;
+            tgl = formatDate(date);
             // Simple pie chart
-
             var settings = {
-                "url": "http://101.50.3.56/libunram_api/public/api/visitor/getByRoom",
+                "url": "{{url('/api/visitor/getByRoom')}}"+"/"+tgl,
                 "method": "GET",
                 "timeout": 0,
             };
@@ -577,9 +579,6 @@
                     }
                 }
 
-                // console.log(baca);
-                // console.log(mm);
-                // console.log(sb);
                 total = baca+mm+sb;
                 document.getElementById("baca").innerHTML = "( "+baca+" Orang )";
                 document.getElementById("mm").innerHTML = "( "+mm+" Orang )";
@@ -587,18 +586,13 @@
                 document.getElementById("totalPengunjung").innerHTML = total;
 
                 var data = {
-                    // labels: ['R. Baca', 'R. Multimedia', 'R. Serbaguna'],
                     series: [baca, mm, sb]
                 }
 
                 var sum = function(a, b) { return a + b };
-                // new Chartist.Pie('#ct-chart5', data);
 
                 new Chartist.Pie('#ct-chart5', data, {
                     labelInterpolationFnc: function(value) {
-                        // console.log("ini value : "+value);
-                        // console.log("ini sum : "+data.series.reduce(sum));
-                        // return Math.round(value) + ' Orang';
                         return Math.round(value / data.series.reduce(sum) * 100) + '%';
                     }
                 });
@@ -612,18 +606,69 @@
                 autoclose: true
             });
 
-            // var tes= document.getElementById('data_1').value;
-            // console.log(tes);
-
             $("#tgl").on('change', function(event) {
                 event.preventDefault();
-                var tes= document.getElementById('tgl').value;
-                var date = new Date(tes);
-                console.log(date.toString("YYYY-MM-DD"));
-                // alert(this.value);
-                /* Act on the event */
+                tanggal = formatDate(document.getElementById('tgl').value);
+                console.log(tanggal);
+                getByTanggal(tanggal)
             });
         });
+
+        function getByTanggal(tgl){
+            var settings = {
+                "url": "{{url('/api/visitor/getByRoom')}}"+"/"+tgl,
+                "method": "GET",
+                "timeout": 0,
+            };
+
+            baca =0;
+            mm = 0;
+            sb = 0;
+            $.ajax(settings).done(function (response) {
+                console.log(response.data[0].nama_ruangan);
+                for(i=0;i<response.data.length;i++){
+                    if(response.data[i].nama_ruangan == 'Ruang Baca'){
+                        baca+=1;
+                    }else if(response.data[i].nama_ruangan == 'Ruang Multimedia'){
+                        mm+=1;
+                    }else if(response.data[i].nama_ruangan == 'Ruang Serbaguna'){
+                        sb+=1;
+                    }
+                }
+
+                total = baca+mm+sb;
+                document.getElementById("baca").innerHTML = "( "+baca+" Orang )";
+                document.getElementById("mm").innerHTML = "( "+mm+" Orang )";
+                document.getElementById("sb").innerHTML = "( "+sb+" Orang )";
+                document.getElementById("totalPengunjung").innerHTML = total;
+
+                var data = {
+                    series: [baca, mm, sb]
+                }
+
+                var sum = function(a, b) { return a + b };
+
+                new Chartist.Pie('#ct-chart5', data, {
+                    labelInterpolationFnc: function(value) {
+                        return Math.round(value / data.series.reduce(sum) * 100) + '%';
+                    }
+                });
+            });
+        }
+
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) 
+                month = '0' + month;
+            if (day.length < 2) 
+                day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
     </script>
 
 </body>
