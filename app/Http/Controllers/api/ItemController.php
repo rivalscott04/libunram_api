@@ -60,7 +60,8 @@ class ItemController extends Controller
                     'title' => $data->biblio->title,
                     'publihser_name' => '-',
                     'publish_year' => '-',
-                    'author1' => '-'
+                    'author1' => '-',
+                    'author2' => '-'
                 ], 200);
             }
             else if(count($data->biblio->author) < 2){
@@ -73,6 +74,7 @@ class ItemController extends Controller
                     'publihser_name' => $data->biblio->publisher->publisher_name,
                     'publish_year' => $data->biblio->publish_year,
                     'author1' => $data->biblio->author[0]->author_detail->author_name,
+                    'author2' => '-'
                 ], 200);
             }
             return response()->json([
