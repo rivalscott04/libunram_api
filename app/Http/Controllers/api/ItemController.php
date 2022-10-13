@@ -67,8 +67,8 @@ class ItemController extends Controller
                 'status' => 'success',
                 'message' => 'Detail Item Found',
                 'item_code' => $data->item_code,
-                'title' => $data->biblio->title
-                // 'publihser_name' => $data->biblio->publisher->publisher_name,
+                'title' => $data->biblio->title,
+                'publihser_name' => $data->biblio->publisher->publisher_name,
                 // 'publish_year' => $data->biblio->publish_year,
                 // 'author1' => $data->biblio->author[0]->author_detail->author_name,
                 // 'author2' => $data->biblio->author[1]->author_detail->author_name
