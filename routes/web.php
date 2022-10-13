@@ -17,15 +17,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('guest', 'GuestController@index');
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Route::get('/tem', function () {
+//     return view('app');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/tem', function () {
-    return view('app');
-});
-
-Route::get('/visitor', function () {
     $date = Carbon::now()->format('Y-m-d');
     // $room = DB::table('room')->get();
     // return $room;
