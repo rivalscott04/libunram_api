@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 class ItemController extends Controller
 {
     public function index(){
-        $data = Item::get();
+        $data = Item::limit(25)->get();
         return response()->json([
             'status' => 'success',
             'message' => 'List Of Item',

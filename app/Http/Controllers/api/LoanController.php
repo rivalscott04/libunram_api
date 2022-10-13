@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Validator;
 class LoanController extends Controller
 {
     public function index(){
-        $data = Loan::get();
+        $data = Loan::limit(25)->get();
         return response()->json([
             'status' => 'success',
             'message' => 'List Of Loan',
@@ -34,7 +34,7 @@ class LoanController extends Controller
             ],500);
         }
        
-        $data = Loan::where('member_id',$request->member_id)->with('item')->get();
+        $data = Loan::where('member_id',$request->member_id)->with('item')->limit(25)->get();
         // return $loan;
         if($data){
             return response()->json([
@@ -63,7 +63,7 @@ class LoanController extends Controller
             ],500);
         }
        
-        $data = Loan::where('member_id',$request->member_id)->where('is_return','=','1')->with('item')->get();
+        $data = Loan::where('member_id',$request->member_id)->where('is_return','=','1')->with('item')->limit(25)->get();
         // return $loan;
         if($data){
             return response()->json([
@@ -117,7 +117,7 @@ class LoanController extends Controller
         ->first();
         // return $limit->loan_limit;
 
-         $history = Loan::where('member_id',$request->member_id)->where('is_return','=','0')->get();
+         $history = Loan::where('member_id',$request->member_id)->where('is_return','=','0')->limit(25)->get();
         //  return count($history);
 
         if($limit->loan_limit == count($history)){

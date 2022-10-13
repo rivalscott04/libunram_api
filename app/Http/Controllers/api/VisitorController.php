@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 class VisitorController extends Controller
 {
     public function index(){
-        $data = Visitor::get();
+        $data = Visitor::limit(25)->get();
         return response()->json([
             'status' => 'success',
             'message' => 'List Of Visitor',
