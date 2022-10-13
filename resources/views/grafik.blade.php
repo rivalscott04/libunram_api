@@ -557,7 +557,7 @@
             // Simple pie chart
 
             var settings = {
-                "url": "http://127.0.0.1:8000/api/visitor/getByRoom",
+                "url": "http://101.50.3.56/libunram_api/public/api/visitor/getByRoom",
                 "method": "GET",
                 "timeout": 0,
             };
