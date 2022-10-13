@@ -55,6 +55,28 @@ class VisitorController extends Controller
         }
     }
 
+    public function getByRoom(){
+        // return 'tes';
+        $date = Carbon::now()->format('Y-m-d');
+        $data = DB::table("visitor_count")
+        ->join('room', 'visitor_count.id_ruangan', '=', 'room.id_ruangan')
+        ->where(DB::raw("(DATE_FORMAT(checkin_date,'%Y-%m-%d'))"),$date)
+        ->get();
+        if($data){
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Detail Visitor Found',
+                'data' => $data
+            ], 200);
+        }else{
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Detail Visitor Not Found',
+                'data' => null
+            ], 404);
+        }
+    }
+
     public function store(Request $request){
         $validator = Validator::make($request->all(),[
             "member_id" => "required",
