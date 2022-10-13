@@ -50,7 +50,7 @@ class ItemController extends Controller
         $data = Item::where('item_code',$request->item_code)->with('biblio')->first();
         // return $data;
         if($data){
-            return "ada";
+            // return "ada";
             if(count($data->biblio->author) < 2){
                 // return "Data Lebih dari satu";
                 return response()->json([
