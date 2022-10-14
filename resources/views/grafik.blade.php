@@ -47,13 +47,13 @@
                 </li>
                 <li>
                     <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span> <span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level collapse">
+                    {{-- <ul class="nav nav-second-level collapse">
                         <li><a href="index.html">Dashboard v.1</a></li>
                         <li><a href="dashboard_2.html">Dashboard v.2</a></li>
                         <li><a href="dashboard_3.html">Dashboard v.3</a></li>
                         <li><a href="dashboard_4_1.html">Dashboard v.4</a></li>
                         <li><a href="dashboard_5.html">Dashboard v.5 </a></li>
-                    </ul>
+                    </ul> --}}
                 </li>
                 {{-- <li>
                     <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">Layouts</span></a>
@@ -519,11 +519,11 @@
             </div>
         </div>
         <div class="footer">
-            <div class="float-right">
+            {{-- <div class="float-right">
                 10GB of <strong>250GB</strong> Free.
-            </div>
+            </div> --}}
             <div>
-                <strong>Copyright</strong> Example Company &copy; 2014-2018
+                <strong>Copyright</strong> UNRAM &copy; 2022
             </div>
         </div>
 
