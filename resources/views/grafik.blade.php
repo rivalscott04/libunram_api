@@ -625,14 +625,20 @@
             mm = 0;
             sb = 0;
             $.ajax(settings).done(function (response) {
-                console.log(response.data[0].nama_ruangan);
-                for(i=0;i<response.data.length;i++){
-                    if(response.data[i].nama_ruangan == 'Ruang Baca'){
-                        baca+=1;
-                    }else if(response.data[i].nama_ruangan == 'Ruang Multimedia'){
-                        mm+=1;
-                    }else if(response.data[i].nama_ruangan == 'Ruang Serbaguna'){
-                        sb+=1;
+                console.log(response.data.length);
+                if (response.data.length == 0){
+                    baca =0;
+                    mm = 0;
+                    sb = 0;
+                }else{
+                    for(i=0;i<response.data.length;i++){
+                        if(response.data[i].nama_ruangan == 'Ruang Baca'){
+                            baca+=1;
+                        }else if(response.data[i].nama_ruangan == 'Ruang Multimedia'){
+                            mm+=1;
+                        }else if(response.data[i].nama_ruangan == 'Ruang Serbaguna'){
+                            sb+=1;
+                        }
                     }
                 }
 
