@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | Chartist</title>
+    <title>UNRAM | Library</title>
 
     <link href="{{asset("css/bootstrap.min.css")}}" rel="stylesheet">
     <link href="{{asset("font-awesome/css/font-awesome.css")}}" rel="stylesheet">
@@ -28,11 +28,11 @@
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element">
-                        <img alt="image" class="rounded-circle" src="img/profile_small.jpg"/>
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <img alt="image" class="rounded-circle" src="img/unram.png" style="max-width: 100px"/>
+                        {{-- <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="block m-t-xs font-bold">David Williams</span>
                             <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
-                        </a>
+                        </a> --}}
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a class="dropdown-item" href="profile.html">Profile</a></li>
                             <li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
@@ -42,7 +42,7 @@
                         </ul>
                     </div>
                     <div class="logo-element">
-                        IN+
+                        U
                     </div>
                 </li>
                 <li>
@@ -270,7 +270,7 @@
                 </div>
             </form>
         </div>
-            <ul class="nav navbar-top-links navbar-right">
+            {{-- <ul class="nav navbar-top-links navbar-right">
                 <li>
                     <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
                 </li>
@@ -369,14 +369,12 @@
                         </li>
                     </ul>
                 </li>
-
-
                 <li>
                     <a href="login.html">
                         <i class="fa fa-sign-out"></i> Log out
                     </a>
                 </li>
-            </ul>
+            </ul> --}}
 
         </nav>
         </div>
