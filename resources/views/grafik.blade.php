@@ -572,7 +572,7 @@
                         baca+=1;
                     }else if(response.data[i].nama_ruangan == 'Ruang Multimedia'){
                         mm+=1;
-                    }else if(response.data[i].nama_ruangan == 'Ruang Serbaguna'){
+                    }else if(response.data[i].nama_ruangan == 'Ruang DTS'){
                         sb+=1;
                     }
                 }
