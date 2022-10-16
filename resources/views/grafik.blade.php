@@ -583,17 +583,31 @@
                 document.getElementById("sb").innerHTML = "( "+sb+" Orang )";
                 document.getElementById("totalPengunjung").innerHTML = total;
 
-                var data = {
-                    series: [baca, mm, sb]
-                }
+                // var data = {
+                //     series: [baca, mm, sb]
+                // }
 
-                var sum = function(a, b) { return a + b };
+                // var sum = function(a, b) { return a + b };
 
-                new Chartist.Pie('#ct-chart5', data, {
-                    labelInterpolationFnc: function(value) {
-                        return Math.round(value / data.series.reduce(sum) * 100) + '%';
-                    }
-                });
+                // new Chartist.Pie('#ct-chart5', data, {
+                //     labelInterpolationFnc: function(value) {
+                //         return Math.round(value / data.series.reduce(sum) * 100) + '%';
+                //     }
+                // });
+
+                var kerjasama1Data = {
+                    labels: ["Pendidikan", "Penelitian", "Lainnya"],
+                    datasets: [{
+                        data: [3,4,2],
+                        backgroundColor: ["#2ba9e1", "#1cc09f", "violet"]
+                    }]
+                };
+
+                console.log('')
+                new Chartist.Pie('#ct-chart5', kerjasama1Data);
+
+                // var ctx10 = document.getElementById("ct-chart5");
+	            // new Chart(ctx10, {type: 'doughnut', data: kerjasama1Data, options:doughnutOptions});
             });
 
             var mem = $('#data_1 .input-group.date').datepicker({
