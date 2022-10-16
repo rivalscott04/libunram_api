@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Item;
 use App\Models\Loan;
 use Carbon\Carbon;
 use DateTime;
@@ -34,7 +35,7 @@ class LoanController extends Controller
             ],500);
         }
        
-        $data = Loan::where('member_id',$request->member_id)->with('item')->limit(25)->get();
+        $data = Loan::where('member_id',$request->member_id)->with('item')->orderBy('desc')->limit(25)->get();
         // return $loan;
         if($data){
             return response()->json([
@@ -63,7 +64,7 @@ class LoanController extends Controller
             ],500);
         }
        
-        $data = Loan::where('member_id',$request->member_id)->where('is_return','=','1')->with('item')->limit(25)->get();
+        $data = Loan::where('member_id',$request->member_id)->where('is_return','=','1')->with('item')->orderBy('desc')->limit(25)->get();
         // return $loan;
         if($data){
             return response()->json([
@@ -96,13 +97,21 @@ class LoanController extends Controller
         $today = Carbon::now()->format('Y-m-d');
         $date = new DateTime($today);
         $client = new Client();
-        $response = $client->request('GET','http://101.50.3.56/config.json');
+        $response = $client->request('GET','https://data.if.unram.ac.id/libunram/config.json');
         $content = $response->getBody()->getContents();
         $data = json_decode($content);
         $addDay = '+'.$data->due_date.' day';
         // $tanggal = $date->modify($addDay)->format('Y-m-d');
-        // return $tanggal;
-        
+        // return $addDay;
+        $item = Item::where('item_code',$request->item_code)->first();
+        if(!$item){
+            return response()->json([
+                'status' => 'Error',
+                'message' => 'Buku Tidak Tersedia',
+                'data' => null
+            ], 404);
+        }
+
         $loan = Loan::where('is_lent','=','1')->where('is_return','=','0')->where('item_code',$request->item_code)->first();
         if($loan){
             return response()->json([
