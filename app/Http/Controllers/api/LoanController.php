@@ -35,7 +35,7 @@ class LoanController extends Controller
             ],500);
         }
        
-        $data = Loan::where('member_id',$request->member_id)->with('item')->orderBy('desc')->limit(25)->get();
+        $data = Loan::where('member_id',$request->member_id)->with('item')->orderBy('loan_date','desc')->limit(25)->get();
         // return $loan;
         if($data){
             return response()->json([
